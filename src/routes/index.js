@@ -175,6 +175,10 @@ import ContactsGrid from "../pages/Contacts/contacts-grid";
 import ContactsList from "../pages/Contacts/ContactList/contacts-list";
 import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile";
 
+
+// Sub Admin Users 
+import SubAdminUsers from "../pages/Sub-Admin-Users/subAdminUsers";
+
 const authProtectedRoutes = [
   { path: "/dashboard", component: <Dashboard /> },
   { path: "/dashboard-saas", component: <DashboardSaas /> },
@@ -203,7 +207,10 @@ const authProtectedRoutes = [
   { path: "/profile", component: <UserProfile /> },
 
   //Ecommerce
-  { path: "/ecommerce-product-detail/:id", component: <EcommerceProductDetail /> },
+  {
+    path: "/ecommerce-product-detail/:id",
+    component: <EcommerceProductDetail />,
+  },
   { path: "/ecommerce-products", component: <EcommerceProducts /> },
   { path: "/ecommerce-orders", component: <EcommerceOrders /> },
   { path: "/ecommerce-customers", component: <EcommerceCustomers /> },
@@ -327,8 +334,11 @@ const authProtectedRoutes = [
   {
     path: "/",
     exact: true,
-    component: < Navigate to="/dashboard" />,
+    component: <Navigate to="/dashboard" />,
   },
+
+  // Manage Sub Admin User
+  { path: "/manage-sub-admin-users", component: <ContactsList /> },
 ];
 
 const publicRoutes = [
@@ -359,7 +369,10 @@ const publicRoutes = [
   { path: "/auth-email-verification", component: <EmailVerification /> },
   { path: "/auth-email-verification-2", component: <EmailVerification2 /> },
   { path: "/auth-two-step-verification", component: <TwostepVerification /> },
-  { path: "/auth-two-step-verification-2", component: <TwostepVerification2 /> },
+  {
+    path: "/auth-two-step-verification-2",
+    component: <TwostepVerification2 />,
+  },
 ];
 
 export { authProtectedRoutes, publicRoutes };
