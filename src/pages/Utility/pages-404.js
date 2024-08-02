@@ -7,11 +7,11 @@ import error from "../../assets/images/error-img.png"
 
 const Pages404 = () => {
     //meta title
-    document.title = "404 Error Page | Skote - React Admin & Dashboard Template";
+    document.title = "404 Error Page";
 
   return (
     <React.Fragment>
-      <div className="account-pages my-5 pt-5">
+      <div className="account-pages pt-5">
         <Container>
           <Row>
             <Col lg="12">
@@ -24,7 +24,7 @@ const Pages404 = () => {
                 <div className="mt-5 text-center">
                   <Link
                     className="btn btn-primary waves-effect waves-light "
-                    to="/dashboard"
+                    to="/"
                   >
                     Back to Dashboard
                   </Link>

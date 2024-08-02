@@ -1,6 +1,9 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
+// For No Route Match
+import PageNotFound from "../pages/Utility/pages-404";
+
 // Pages Component
 import Chat from "../pages/Chat/Chat";
 
@@ -175,12 +178,11 @@ import ContactsGrid from "../pages/Contacts/contacts-grid";
 import ContactsList from "../pages/Contacts/ContactList/contacts-list";
 import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile";
 
-
-// Sub Admin Users 
+// Sub Admin Users
 import SubAdminUsers from "../pages/Sub-Admin-Users/subAdminUsers";
 
 const authProtectedRoutes = [
-  { path: "/dashboard", component: <Dashboard /> },
+  { path: "/", component: <Dashboard /> },
   { path: "/dashboard-saas", component: <DashboardSaas /> },
   { path: "/dashboard-crypto", component: <DashboardCrypto /> },
   { path: "/blog", component: <Blog /> },
@@ -338,10 +340,12 @@ const authProtectedRoutes = [
   },
 
   // Manage Sub Admin User
-  { path: "/manage-sub-admin-users", component: <ContactsList /> },
+  { path: "/manage-sub-admin-users", component: <SubAdminUsers /> },
 ];
 
 const publicRoutes = [
+  { path: "*", component: <PageNotFound /> },
+
   { path: "/logout", component: <Logout /> },
   { path: "/login", component: <Login /> },
   { path: "/forgot-password", component: <ForgetPwd /> },

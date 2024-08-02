@@ -37,7 +37,7 @@ import { isEmpty } from "lodash";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
-const ContactsList = props => {
+const SubAdminUsers = props => {
 
   //meta title
   document.title = "Sub Admin User List | Admin";
@@ -485,4 +485,4 @@ const ContactsList = props => {
   );
 };
 
-export default withRouter(ContactsList);
+export default withRouter(SubAdminUsers);

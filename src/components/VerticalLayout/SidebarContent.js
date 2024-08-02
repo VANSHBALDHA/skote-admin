@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
-
 // //Import Scrollbar
 import SimpleBar from "simplebar-react";
 
@@ -14,7 +13,7 @@ import { Link } from "react-router-dom";
 //i18n
 import { withTranslation } from "react-i18next";
 
-const SidebarContent = props => {
+const SidebarContent = (props) => {
   const ref = useRef();
   const activateParentDropdown = useCallback((item) => {
     item.classList.add("active");
@@ -127,7 +126,7 @@ const SidebarContent = props => {
   }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     activeMenu();
   }, [activeMenu]);
 
@@ -147,38 +146,150 @@ const SidebarContent = props => {
           <ul className="metismenu list-unstyled" id="side-menu">
             {/* <li className="menu-title">{props.t("Menu")} </li> */}
             <li>
-              <Link to="/#" className="">
+              <Link to="/">
                 <i className="bx bx-home-circle"></i>
                 <span>{props.t("Dashboards")}</span>
               </Link>
-              {/* <ul className="sub-menu">
-                <li>
-                  <Link to="/dashboard">{props.t("Default")}</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard-saas">{props.t("Saas")}</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard-crypto">{props.t("Crypto")}</Link>
-                </li>
-                <li>
-                  <Link to="/blog">{props.t("Blog")}</Link>
-                </li>
-                <li>
-                  <Link to="/dashboard-job">
-                    <span className="badge rounded-pill text-bg-success float-end" key="t-new">New</span>
-                    {props.t("Job")}
-                  </Link>
-                </li>
-              </ul> */}
             </li>
 
             {/* <li className="menu-title">{props.t("Apps")}</li> */}
 
             <li>
-              <Link to="/manage-sub-admin-users" >
-                <i className="bx bx-calendar"></i>
+              <Link to="/manage-sub-admin-users">
+                <i className="bx bx-user-circle"></i>
                 <span>{props.t("Manage Sub Admin Users")}</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="#" className="has-arrow">
+                <i class="bx bx-cog"></i>
+                <span>{props.t("Manage Master")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/dashboard">- {props.t("Display Name")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Certificate")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-crypto">- {props.t("Brand")}</Link>
+                </li>
+                <li>
+                  <Link to="/blog">- {props.t("Categories")}</Link>
+                </li>
+                <li>
+                  <Link to="/blog">- {props.t("Sub Categories")}</Link>
+                </li>
+                <li>
+                  <Link to="/blog">- {props.t("Sub Sub-Categories")}</Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/manage-sub-admin-users">
+                <i class="bx bx-basket"></i>
+                <span>{props.t("Manage Products")}</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/#" className="has-arrow">
+                <i class="bx bx-store-alt"></i>
+                <span>{props.t("Manage Inventory")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/dashboard">- {props.t("Display")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Reserved")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-crypto">- {props.t("Sales")}</Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/#" className="has-arrow">
+                <i class="bx bx-group"></i>
+                <span>{props.t("Manage Customers")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/dashboard">- {props.t("Individual")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Corporate")}</Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/#" className="has-arrow">
+                <i class="bx bx-list-ul"></i>
+                <span>{props.t("Manage Requests")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/dashboard">- {props.t("Cart")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Quote")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">
+                    - {props.t("BOM - (Bill of Materials)")}
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("New Product")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Quote")}</Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/manage-ticket">
+                <i className="bx bx-user-circle"></i>
+                <span>{props.t("Manage Ticket")}</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/#" className="has-arrow">
+                <i className="bx bxs-detail" />
+                <span>{props.t("Manage Contents")}</span>
+              </Link>
+              <ul className="sub-menu">
+                <li>
+                  <Link to="/dashboard">- {props.t("Blogs")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Banner")}</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard-saas">- {props.t("Legal")}</Link>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/manage-ticket">
+                <i className="bx bx-user-circle"></i>
+                <span>{props.t("Generate Reports")}</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/manage-ticket">
+                <i class="bx bx-cog"></i>
+                <span>{props.t("Settings")}</span>
               </Link>
             </li>
 
@@ -195,7 +306,7 @@ const SidebarContent = props => {
               </Link>
             </li> */}
 
-            <li>
+            {/* <li>
               <Link to="/#" className="has-arrow">
                 <i className="bx bx-store"></i>
                 <span>{props.t("Ecommerce")}</span>
@@ -411,9 +522,9 @@ const SidebarContent = props => {
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
-            <li className="menu-title">Pages</li>
+            {/* <li className="menu-title">Pages</li>
             <li>
               <Link to="/#" className="has-arrow">
                 <i className="bx bx-user-circle"></i>
@@ -511,10 +622,9 @@ const SidebarContent = props => {
                   <Link to="/pages-500">{props.t("Error 500")}</Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
-            <li className="menu-title">{props.t("Components")}</li>
-
+            {/* <li className="menu-title">{props.t("Components")}</li>
             <li>
               <Link to="/#" className="has-arrow">
                 <i className="bx bx-tone" />
@@ -569,11 +679,11 @@ const SidebarContent = props => {
                 <li>
                   <Link to="/ui-placeholders">{props.t("Placeholders")}</Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link to="/ui-sweet-alert">
                     {props.t("Sweet-Alert")}
                   </Link>
-                </li> */}
+                </li>
                 <li>
                   <Link to="/ui-tabs-accordions">
                     {props.t("Tabs & Accordions")}
@@ -604,11 +714,11 @@ const SidebarContent = props => {
                     {props.t("Notifications")}
                   </Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link to="/ui-breadcrumb">
                     {props.t("Breadcrumb")}
                   </Link>
-                </li> */}
+                </li>
                 <li>
                   <Link to="/ui-utilities">
                     {props.t("Utilities")}
@@ -656,9 +766,9 @@ const SidebarContent = props => {
                 <li>
                   <Link to="/form-mask">{props.t("Form Mask")}</Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link to="/dual-listbox">{props.t("Transfer List")}</Link>
-                </li> */}
+                </li>
               </ul>
             </li>
 
@@ -782,7 +892,7 @@ const SidebarContent = props => {
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </SimpleBar>
