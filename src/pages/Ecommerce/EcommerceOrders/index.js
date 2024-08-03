@@ -330,6 +330,7 @@ function EcommerceOrder() {
               </Card>
             </Col>
           </Row>
+          
           <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle} tag="h4">
               {!!isEdit ? "Edit Order" : "Add Order"}

@@ -75,7 +75,7 @@ import TwostepVerification2 from "../pages/AuthenticationInner/auth-two-step-ver
 import Dashboard from "../pages/Dashboard/index";
 import DashboardSaas from "../pages/Dashboard-saas/index";
 import DashboardCrypto from "../pages/Dashboard-crypto/index";
-import Blog from "../pages/Dashboard-Blog/index";
+// import Blog from "../pages/Dashboard-Blog/index";
 import DashboardJob from "../pages/DashboardJob/index";
 
 //Crypto
@@ -179,13 +179,55 @@ import ContactsList from "../pages/Contacts/ContactList/contacts-list";
 import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile";
 
 // Sub Admin Users
-import SubAdminUsers from "../pages/Sub-Admin-Users/subAdminUsers";
+import SubAdminUsers from "../pages/MyPages/ManageAdminUsers/ManageAdminUsers";
+
+// Manage Master Management
+import Brand from "../pages/MyPages/ManageMaster/Brand";
+import Categories from "../pages/MyPages/ManageMaster/Categories";
+import DisplayName from "../pages/MyPages/ManageMaster/DisplayName";
+import Certificate from "../pages/MyPages/ManageMaster/Certificate";
+import SubCategories from "../pages/MyPages/ManageMaster/SubCategories";
+import SubSubCategories from "../pages/MyPages/ManageMaster/Sub-SubCategories";
+
+// Manage Products
+import ManageProduct from "../pages/MyPages/ManageProduct/ManageProduct";
+
+// Manage Inventory
+import Display from "../pages/MyPages/ManageInventory/Display";
+import Sales from "../pages/MyPages/ManageInventory/Sales";
+import Reserved from "../pages/MyPages/ManageInventory/Reserved";
+
+// Manage Customers
+import Corporate from "../pages/MyPages/ManageCustomers/Corporate";
+import Individual from "../pages/MyPages/ManageCustomers/Individual";
+
+// Manage User Requests
+import Cart from "../pages/MyPages/ManageRequests/Cart";
+
+// Manage Tickets
+import ManageTicket from "../pages/MyPages/ManageTicket/ManageTicket";
+
+// Manage Contents
+import Banner from "../pages/MyPages/ManageContents/Banner";
+import Legal from "../pages/MyPages/ManageContents/Legal";
+import Blog from "../pages/MyPages/ManageContents/Blog";
+
+// Generate Reports
+import GenerateReports from "../pages/MyPages/GenerateReports/GenerateReports";
+
+// Site Settings
+import Setting from "../pages/MyPages/Settings/Setting";
+import Quote from "../pages/MyPages/ManageRequests/Quote";
+import Bom from "../pages/MyPages/ManageRequests/Bom";
+import Contact from "../pages/MyPages/ManageRequests/Contact";
+import NewProduct from "../pages/MyPages/ManageRequests/NewProduct";
+import ManageFeatures from "../pages/MyPages/ManageFeatures/ManageFeatures";
 
 const authProtectedRoutes = [
   { path: "/", component: <Dashboard /> },
   { path: "/dashboard-saas", component: <DashboardSaas /> },
   { path: "/dashboard-crypto", component: <DashboardCrypto /> },
-  { path: "/blog", component: <Blog /> },
+  // { path: "/blog", component: <Blog /> },
   { path: "/dashboard-job", component: <DashboardJob /> },
 
   //Crypto
@@ -215,7 +257,7 @@ const authProtectedRoutes = [
   },
   { path: "/ecommerce-products", component: <EcommerceProducts /> },
   { path: "/ecommerce-orders", component: <EcommerceOrders /> },
-  { path: "/ecommerce-customers", component: <EcommerceCustomers /> },
+  { path: "//ecommerce-customers", component: <EcommerceCustomers /> },
   { path: "/ecommerce-cart", component: <EcommerceCart /> },
   { path: "/ecommerce-checkout", component: <EcommerceCheckout /> },
   { path: "/ecommerce-shops", component: <EcommerceShops /> },
@@ -341,6 +383,54 @@ const authProtectedRoutes = [
 
   // Manage Sub Admin User
   { path: "/manage-sub-admin-users", component: <SubAdminUsers /> },
+
+  // Manage Master Management
+  { path: "/manage-master/display-name", component: <DisplayName /> },
+  { path: "/manage-master/certificate", component: <Certificate /> },
+  { path: "/manage-master/brand", component: <Brand /> },
+  { path: "/manage-master/categories", component: <Categories /> },
+  { path: "/manage-master/sub-categories", component: <SubCategories /> },
+  {
+    path: "/manage-master/sub-sub-categories",
+    component: <SubSubCategories />,
+  },
+  {
+    path: "/manage-master/sub-sub-categories/:id",
+    component: <ManageFeatures />,
+  },
+
+  // Manage Products
+  { path: "/manage-products", component: <ManageProduct /> },
+
+  // Manage Inventory
+  { path: "/manage-inventory/display", component: <Display /> },
+  { path: "/manage-inventory/reserved", component: <Reserved /> },
+  { path: "/manage-inventory/sales", component: <Sales /> },
+
+  // Manage Customers
+  { path: "/manage-customers/individual", component: <Individual /> },
+  { path: "/manage-customers/corporate", component: <Corporate /> },
+
+  // Manage Requests
+  { path: "/manage-request/cart", component: <Cart /> },
+  { path: "/manage-request/quote", component: <Quote /> },
+  { path: "/manage-request/bom", component: <Bom /> },
+  { path: "/manage-request/new-product", component: <NewProduct /> },
+  { path: "/manage-request/contact", component: <Contact /> },
+
+  // Manage Ticket
+  { path: "/manage-ticket", component: <ManageTicket /> },
+
+  // Manage Contents
+  { path: "/manage-contents/blogs", component: <Blog /> },
+  { path: "/manage-contents/banner", component: <Banner /> },
+  { path: "/manage-contents/legal", component: <Legal /> },
+
+  // Generate Reports
+  { path: "/generate-reports", component: <GenerateReports /> },
+
+  // Settings
+  { path: "/settings", component: <Setting /> },
 ];
 
 const publicRoutes = [

@@ -1,5 +1,5 @@
-import React, { Fragment } from "react"
-import PropTypes from "prop-types"
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import {
   useTable,
   useGlobalFilter,
@@ -8,10 +8,10 @@ import {
   useFilters,
   useExpanded,
   usePagination,
-} from "react-table"
-import { Table, Row, Col, Button, Input, CardBody } from "reactstrap"
-import { Filter, DefaultColumnFilter } from "./filters"
-import JobListGlobalFilter from "../../components/Common/GlobalSearchFilter"
+} from "react-table";
+import { Table, Row, Col, Button, Input, CardBody } from "reactstrap";
+import { Filter, DefaultColumnFilter } from "./filters";
+import JobListGlobalFilter from "../../components/Common/GlobalSearchFilter";
 
 // Define a default UI for filtering
 function GlobalFilter({
@@ -20,11 +20,11 @@ function GlobalFilter({
   setGlobalFilter,
   isJobListGlobalFilter,
 }) {
-  const count = preGlobalFilteredRows.length
-  const [value, setValue] = React.useState(globalFilter)
-  const onChange = useAsyncDebounce(value => {
-    setGlobalFilter(value || undefined)
-  }, 200)
+  const count = preGlobalFilteredRows.length;
+  const [value, setValue] = React.useState(globalFilter);
+  const onChange = useAsyncDebounce((value) => {
+    setGlobalFilter(value || undefined);
+  }, 200);
 
   return (
     <React.Fragment>
@@ -36,9 +36,9 @@ function GlobalFilter({
                 Search this table
               </span>
               <input
-                onChange={e => {
-                  setValue(e.target.value)
-                  onChange(e.target.value)
+                onChange={(e) => {
+                  setValue(e.target.value);
+                  onChange(e.target.value);
                 }}
                 id="search-bar-0"
                 type="text"
@@ -53,7 +53,7 @@ function GlobalFilter({
       </Col>
       {isJobListGlobalFilter && <JobListGlobalFilter />}
     </React.Fragment>
-  )
+  );
 }
 
 const TableContainer = ({
@@ -70,6 +70,20 @@ const TableContainer = ({
   customPageSize,
   className,
   customPageSizeOptions,
+  isAddCertificate,
+  handleAddCertificate,
+  isAddBrand,
+  handleAddBrand,
+  isAddCategory,
+  handleAddCategory,
+  isAddSubCategory,
+  handleAddSubCategory,
+  isAddSubSubCategory,
+  handleAddSubSubCategory,
+  isAddFeatures,
+  handleAddFeatures,
+  isAddReservedProduct,
+  handleAddReservedProduct,
 }) => {
   const {
     getTableProps,
@@ -109,20 +123,20 @@ const TableContainer = ({
     useSortBy,
     useExpanded,
     usePagination
-  )
+  );
 
-  const generateSortingIndicator = column => {
-    return column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""
-  }
+  const generateSortingIndicator = (column) => {
+    return column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : "";
+  };
 
-  const onChangeInSelect = event => {
-    setPageSize(Number(event.target.value))
-  }
+  const onChangeInSelect = (event) => {
+    setPageSize(Number(event.target.value));
+  };
 
-  const onChangeInInput = event => {
-    const page = event.target.value ? Number(event.target.value) - 1 : 0
-    gotoPage(page)
-  }
+  const onChangeInInput = (event) => {
+    const page = event.target.value ? Number(event.target.value) - 1 : 0;
+    gotoPage(page);
+  };
   return (
     <Fragment>
       <Row className="mb-2">
@@ -132,7 +146,7 @@ const TableContainer = ({
             value={pageSize}
             onChange={onChangeInSelect}
           >
-            {[10, 20, 30, 40, 50].map(pageSize => (
+            {[10, 20, 30, 40, 50].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
                 Show {pageSize}
               </option>
@@ -192,14 +206,119 @@ const TableContainer = ({
             </div>
           </Col>
         )}
+        {isAddCertificate && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddCertificate}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Certificate
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddBrand && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddBrand}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Brand
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddCategory && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddCategory}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Category
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddSubCategory && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddSubCategory}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Sub Category
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddSubSubCategory && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddSubSubCategory}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Sub-Sub Category
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddFeatures && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddFeatures}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Feature
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddReservedProduct && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddReservedProduct}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Inventory
+              </Button>
+            </div>
+          </Col>
+        )}
       </Row>
 
       <div className="table-responsive react-table">
         <Table bordered hover {...getTableProps()} className={className}>
           <thead className="table-light table-nowrap">
-            {headerGroups.map(headerGroup => (
+            {headerGroups.map((headerGroup) => (
               <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
+                {headerGroup.headers.map((column) => (
                   <th key={column.id}>
                     <div className="mb-2" {...column.getSortByToggleProps()}>
                       {column.render("Header")}
@@ -213,21 +332,21 @@ const TableContainer = ({
           </thead>
 
           <tbody {...getTableBodyProps()}>
-            {page.map(row => {
-              prepareRow(row)
+            {page.map((row) => {
+              prepareRow(row);
               return (
                 <Fragment key={row.getRowProps().key}>
                   <tr>
-                    {row.cells.map(cell => {
+                    {row.cells.map((cell) => {
                       return (
                         <td key={cell.id} {...cell.getCellProps()}>
                           {cell.render("Cell")}
                         </td>
-                      )
+                      );
                     })}
                   </tr>
                 </Fragment>
-              )
+              );
             })}
           </tbody>
         </Table>
@@ -285,11 +404,11 @@ const TableContainer = ({
         </Col>
       </Row>
     </Fragment>
-  )
-}
+  );
+};
 
 TableContainer.propTypes = {
   preGlobalFilteredRows: PropTypes.any,
-}
+};
 
-export default TableContainer
+export default TableContainer;

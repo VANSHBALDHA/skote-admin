@@ -1,11 +1,22 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import { Row, Col, CardBody, Card, Alert, Container, Form, Input, FormFeedback, Label } from "reactstrap";
+import {
+  Row,
+  Col,
+  CardBody,
+  Card,
+  Alert,
+  Container,
+  Form,
+  Input,
+  FormFeedback,
+  Label,
+} from "reactstrap";
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import withRouter from "../../components/Common/withRouter";
 
 // Formik validation
@@ -27,10 +38,11 @@ import logo from "../../assets/images/logo.svg";
 //Import config
 import { facebook, google } from "../../config";
 
-const Login = props => {
+const Login = (props) => {
+  const navigate = useNavigate();
 
   //meta title
-  document.title = "Login | Skote - React Admin & Dashboard Template";
+  document.title = "Login";
 
   const dispatch = useDispatch();
 
@@ -39,19 +51,21 @@ const Login = props => {
     enableReinitialize: true,
 
     initialValues: {
-      email: "admin@themesbrand.com" || '',
-      password: "123456" || '',
+      email: "admin@gmail.com" || "",
+      password: "123456" || "",
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: (values) => {
-      dispatch(loginUser(values, props.router.navigate));
-    }
+      // dispatch(loginUser(values, props.router.navigate));
+      localStorage.setItem("authUser", JSON.stringify(values));
+      navigate("/");
+    },
   });
 
-  const { error } = useSelector(state => ({
+  const { error } = useSelector((state) => ({
     error: state.Login.error,
   }));
 
@@ -76,7 +90,7 @@ const Login = props => {
   };
 
   //handleGoogleLoginResponse
-  const googleResponse = response => {
+  const googleResponse = (response) => {
     signIn(response, "google");
   };
 
@@ -84,17 +98,17 @@ const Login = props => {
   // const twitterResponse = e => {}
 
   //handleFacebookLoginResponse
-  const facebookResponse = response => {
+  const facebookResponse = (response) => {
     signIn(response, "facebook");
   };
 
   return (
     <React.Fragment>
-      <div className="home-btn d-none d-sm-block">
+      {/* <div className="home-btn d-none d-sm-block">
         <Link to="/" className="text-dark">
           <i className="bx bx-home h2" />
         </Link>
-      </div>
+      </div> */}
       <div className="account-pages my-5 pt-sm-5">
         <Container>
           <Row className="justify-content-center">
@@ -105,7 +119,7 @@ const Login = props => {
                     <Col xs={7}>
                       <div className="text-primary p-4">
                         <h5 className="text-primary">Welcome Back !</h5>
-                        <p>Sign in to continue to Skote.</p>
+                        <p>Sign in to continue to Ecommerce.</p>
                       </div>
                     </Col>
                     <Col className="col-5 align-self-end">
@@ -118,7 +132,7 @@ const Login = props => {
                     <Link to="/" className="logo-light-element">
                       <div className="avatar-md profile-user-wid mb-4">
                         <span className="avatar-title rounded-circle bg-light">
-                        <img
+                          <img
                             src={logo}
                             alt=""
                             className="rounded-circle"
@@ -150,11 +164,15 @@ const Login = props => {
                           onBlur={validation.handleBlur}
                           value={validation.values.email || ""}
                           invalid={
-                            validation.touched.email && validation.errors.email ? true : false
+                            validation.touched.email && validation.errors.email
+                              ? true
+                              : false
                           }
                         />
                         {validation.touched.email && validation.errors.email ? (
-                          <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
+                          <FormFeedback type="invalid">
+                            {validation.errors.email}
+                          </FormFeedback>
                         ) : null}
                       </div>
 
@@ -168,11 +186,17 @@ const Login = props => {
                           onChange={validation.handleChange}
                           onBlur={validation.handleBlur}
                           invalid={
-                            validation.touched.password && validation.errors.password ? true : false
+                            validation.touched.password &&
+                            validation.errors.password
+                              ? true
+                              : false
                           }
                         />
-                        {validation.touched.password && validation.errors.password ? (
-                          <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                        {validation.touched.password &&
+                        validation.errors.password ? (
+                          <FormFeedback type="invalid">
+                            {validation.errors.password}
+                          </FormFeedback>
                         ) : null}
                       </div>
 
@@ -200,15 +224,17 @@ const Login = props => {
                       </div>
 
                       <div className="mt-4 text-center">
-                        <h5 className="font-size-14 mb-3">Sign in with</h5>
+                        {/* <h5 className="font-size-14 mb-3">Sign in with</h5> */}
 
                         <ul className="list-inline">
-                          <li className="list-inline-item">
+
+                          {/* Facebook Login */}
+                          {/* <li className="list-inline-item">
                             <FacebookLogin
                               appId={facebook.APP_ID}
                               autoLoad={false}
                               callback={facebookResponse}
-                              render={renderProps => (
+                              render={(renderProps) => (
                                 <Link
                                   to="#"
                                   className="social-list-item bg-primary text-white border-primary"
@@ -218,7 +244,8 @@ const Login = props => {
                                 </Link>
                               )}
                             />
-                          </li>
+                          </li> */}
+
                           {/*<li className="list-inline-item">*/}
                           {/*  <TwitterLogin*/}
                           {/*    loginUrl={*/}
@@ -240,10 +267,12 @@ const Login = props => {
                           {/*    </a>*/}
                           {/*  </TwitterLogin>*/}
                           {/*</li>*/}
-                          <li className="list-inline-item">
+
+                          {/* Google Login */}
+                          {/* <li className="list-inline-item">
                             <GoogleLogin
                               clientId={google.CLIENT_ID}
-                              render={renderProps => (
+                              render={(renderProps) => (
                                 <Link
                                   to="#"
                                   className="social-list-item bg-danger text-white border-danger"
@@ -253,9 +282,9 @@ const Login = props => {
                                 </Link>
                               )}
                               onSuccess={googleResponse}
-                              onFailure={() => { }}
+                              onFailure={() => {}}
                             />
-                          </li>
+                          </li> */}
                         </ul>
                       </div>
 
@@ -269,7 +298,7 @@ const Login = props => {
                   </div>
                 </CardBody>
               </Card>
-              <div className="mt-5 text-center">
+              {/* <div className="mt-5 text-center">
                 <p>
                   Don&#39;t have an account ?{" "}
                   <Link to="/register" className="fw-medium text-primary">
@@ -281,7 +310,7 @@ const Login = props => {
                   © {new Date().getFullYear()} Skote. Crafted with{" "}
                   <i className="mdi mdi-heart text-danger" /> by Themesbrand
                 </p>
-              </div>
+              </div> */}
             </Col>
           </Row>
         </Container>
