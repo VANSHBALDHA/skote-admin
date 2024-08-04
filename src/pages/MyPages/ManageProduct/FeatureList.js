@@ -1,10 +1,7 @@
 import React, { useMemo, useState } from "react";
 import withRouter from "../../../components/Common/withRouter";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
-import {
-  categoryData,
-  combineSubCategorydData,
-} from "../../../common/data/MyFackData";
+import { mobile_features } from "../../../common/data/MyFackData";
 import {
   Button,
   Card,
@@ -22,42 +19,32 @@ import {
   Input,
 } from "reactstrap";
 import TableContainer from "../../../components/Common/TableContainer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const SubSubCategories = () => {
-  const navigate = useNavigate();
+const FeatureList = () => {
+  const params = useParams();
 
   const [modal, setModal] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-  const [currentSubCategories, setCurrentSubCategories] = useState(null);
+  const [addFeatures, setAddFeatures] = useState(null);
 
   const toggleModal = () => setModal(!modal);
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      id: (currentSubCategories && currentSubCategories.id) || "",
-      subCategoryName:
-        (currentSubCategories && currentSubCategories.subCategoryName) || "",
-      categoryName:
-        (currentSubCategories && currentSubCategories.categoryName) || "",
-      status: (currentSubCategories && currentSubCategories.status) || "active",
+      id: (addFeatures && addFeatures.id) || "",
+      feature: (addFeatures && addFeatures.feature) || "",
+      specification: (addFeatures && addFeatures.specification) || "",
+      status: (addFeatures && addFeatures.status) || "active",
     },
     validationSchema: Yup.object({
-      subCategoryName: Yup.string().required(
-        "Please enter the sub-sub category name"
-      ),
-      categoryName: Yup.string().required("Please select the sub category"),
+      specification: Yup.string().required("Please enter the specification"),
       status: Yup.string().required("Please select the status"),
     }),
     onSubmit: (values) => {
-      if (isEdit) {
-        console.log("Updating categories:", values);
-      } else {
-        console.log("Adding new categories:", values);
-      }
+      console.log("Updating categories:", values);
       toggleModal();
     },
   });
@@ -70,13 +57,13 @@ const SubSubCategories = () => {
         Cell: ({ value }) => <div className="text-body fw-bold">{value}</div>,
       },
       {
-        Header: "	Sub-Sub Categories Name",
-        accessor: "subCategoryName",
+        Header: "Feature Name",
+        accessor: "feature",
         filterable: true,
       },
       {
-        Header: "Sub Category Name",
-        accessor: "categoryName",
+        Header: "Specification",
+        accessor: "specification",
         filterable: true,
       },
       {
@@ -88,27 +75,6 @@ const SubSubCategories = () => {
             {value.charAt(0).toUpperCase() + value.slice(1)}
           </Badge>
         ),
-      },
-      {
-        Header: "#",
-        Cell: ({ row }) => {
-          const { id } = row.original;
-          return (
-            <Button
-              type="button"
-              color="success"
-              className="btn-rounded mb-2 me-2"
-              style={{ width: "150px" }}
-              onClick={() =>
-                navigate(`/manage-master/sub-sub-categories/${id}`)
-               
-              }
-            >
-              <i className="mdi mdi-plus me-1" />
-              Add Features
-            </Button>
-          );
-        },
       },
       {
         Header: "Action",
@@ -133,15 +99,8 @@ const SubSubCategories = () => {
     []
   );
 
-  const handleEditClick = (subcategory) => {
-    setCurrentSubCategories(subcategory);
-    setIsEdit(true);
-    toggleModal();
-  };
-
-  const handleAddSubSubCategory = () => {
-    setCurrentSubCategories(null);
-    setIsEdit(false);
+  const handleEditClick = (features) => {
+    setAddFeatures(features);
     toggleModal();
   };
 
@@ -151,8 +110,8 @@ const SubSubCategories = () => {
         <Container fluid>
           {/* Render Breadcrumbs */}
           <Breadcrumbs
-            title="Sub Sub-Categories"
-            breadcrumbItem="Manage Sub Sub-Categories"
+            title="Products"
+            breadcrumbItem={`Product Specification - ${params?.id}`}
           />
           <Row>
             <Col lg="12">
@@ -160,11 +119,9 @@ const SubSubCategories = () => {
                 <CardBody>
                   <TableContainer
                     columns={columns}
-                    data={combineSubCategorydData}
+                    data={mobile_features}
                     isGlobalFilter={true}
                     customPageSize={10}
-                    isAddSubSubCategory={true}
-                    handleAddSubSubCategory={handleAddSubSubCategory}
                     className="custom-header-css"
                   />
                 </CardBody>
@@ -172,7 +129,7 @@ const SubSubCategories = () => {
             </Col>
           </Row>
 
-          {/* Modal for Add/Edit Sub Sub-Categories */}
+          {/* Modal for Add/Edit Sub Sub-Categories Features*/}
           <Modal
             isOpen={modal}
             toggle={toggleModal}
@@ -180,58 +137,40 @@ const SubSubCategories = () => {
             keyboard={false}
           >
             <ModalHeader toggle={toggleModal} tag="h4">
-              {isEdit ? "Edit Sub-Sub Category" : "Add Sub-Sub Category"}
+              Add Specification
             </ModalHeader>
             <ModalBody>
               <form onSubmit={formik.handleSubmit}>
                 <Row>
                   <Col className="col-12">
                     <div className="mb-3">
-                      <Label className="form-label">
-                        Sub-Sub Category Name
-                      </Label>
+                      <Label className="form-label">Features Name</Label>
                       <Input
-                        name="subCategoryName"
                         type="text"
-                        placeholder="Insert Sub-Sub Categories Name"
+                        value={formik.values.feature || ""}
+                        disabled
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <Label className="form-label">Features Name</Label>
+                      <Input
+                        name="specification"
+                        type="text"
+                        placeholder="Insert Specification"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.subCategoryName || ""}
+                        value={formik.values.specification || ""}
                         invalid={
-                          formik.touched.subCategoryName &&
-                          formik.errors.subCategoryName
+                          formik.touched.specification &&
+                          formik.errors.specification
                             ? true
                             : false
                         }
                       />
-                      {formik.touched.subCategoryName &&
-                      formik.errors.subCategoryName ? (
+                      {formik.touched.specification &&
+                      formik.errors.specification ? (
                         <FormFeedback type="invalid">
-                          {formik.errors.subCategoryName}
-                        </FormFeedback>
-                      ) : null}
-                    </div>
-                    <div className="mb-3">
-                      <Label className="form-label">Select Sub Category</Label>
-                      <Input
-                        name="categoryName"
-                        type="select"
-                        className="form-select"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.categoryName || "aaa"}
-                      >
-                        {/* <option value="">Select Category</option> */}
-                        {categoryData?.map((data) => (
-                          <option key={data.id} value={data.id}>
-                            {data.categoryName}
-                          </option>
-                        ))}
-                      </Input>
-                      {formik.touched.categoryName &&
-                      formik.errors.categoryName ? (
-                        <FormFeedback type="invalid">
-                          {formik.errors.categoryName}
+                          {formik.errors.specification}
                         </FormFeedback>
                       ) : null}
                     </div>
@@ -260,7 +199,7 @@ const SubSubCategories = () => {
                   <Col>
                     <div className="text-end">
                       <Button type="submit" color="success">
-                        {isEdit ? "Update" : "Save"}
+                        Update
                       </Button>
                     </div>
                   </Col>
@@ -274,4 +213,4 @@ const SubSubCategories = () => {
   );
 };
 
-export default withRouter(SubSubCategories);
+export default withRouter(FeatureList);

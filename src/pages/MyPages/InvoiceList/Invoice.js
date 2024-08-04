@@ -1,12 +1,16 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import withRouter from "../../../components/Common/withRouter";
+import { invoiceData } from "../../../common/data/MyFackData";
+import { Badge, Card, CardBody, Col, Container, Row } from "reactstrap";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
-import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import TableContainer from "../../../components/Common/TableContainer";
-import { salesData } from "../../../common/data/MyFackData";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-const Sales = () => {
+const Invoice = () => {
+  const params = useParams();
+
+  console.log("params", params?.id);
+
   const columns = useMemo(
     () => [
       {
@@ -15,12 +19,12 @@ const Sales = () => {
         Cell: ({ value }) => <div className="text-body fw-bold">{value}</div>,
       },
       {
-        Header: "Order ID",
-        accessor: "orderNo",
+        Header: "Invoice ID",
+        accessor: "invoiceId",
         filterable: true,
         Cell: ({ value }) => (
           <Link
-            to={`/manage-inventory/sales/orders/${value}`}
+            to={`/manage-inventory/sales/invoices/${params?.id}/invoice-details/${value}`}
             className="text-body fw-bold"
           >
             {value}
@@ -28,60 +32,51 @@ const Sales = () => {
         ),
       },
       {
-        Header: "Billing Name",
-        accessor: "customerName",
-        filterable: true,
-        Cell: ({ row }) => (
-          <Link
-            to={`/manage-inventory/sales/invoices/${row.original.orderNo}`}
-            className="text-body fw-bold"
-          >
-            {row.original.customerName}
-          </Link>
-        ),
-      },
-      {
-        Header: "Customer Type",
-        accessor: "customerType",
+        Header: "Title",
+        accessor: "title",
         filterable: true,
       },
       {
-        Header: "Total Amount",
-        accessor: "totalAmount",
+        Header: "Amount",
+        accessor: "amount",
         filterable: true,
-        Cell: ({ value }) => <div className="text-success">₹ {value}</div>,
       },
       {
-        Header: "Received Amount",
-        accessor: "receivedAmount",
+        Header: "Created At",
+        accessor: "dateCreate",
         filterable: true,
-        Cell: ({ value }) => <div className="text-secondary">₹ {value}</div>,
       },
       {
-        Header: "Pending Amount",
-        accessor: "pendingAmount",
+        Header: "Status",
+        accessor: "status",
         filterable: true,
         Cell: ({ value }) => (
-          <div className="text-danger fw-bold">₹ {value}</div>
+          <Badge color={value === "Cancel" ? "danger" : "success"}>
+            {value.charAt(0).toUpperCase() + value.slice(1)}
+          </Badge>
         ),
       },
     ],
     []
   );
 
+  document.title = "invoice list | Admin";
   return (
     <>
       <div className="page-content">
         <Container fluid>
           {/* Render Breadcrumbs */}
-          <Breadcrumbs title="Manage Inventory" breadcrumbItem="Sales" />
+          <Breadcrumbs
+            title="Sales - Invoices"
+            breadcrumbItem="User Invoices"
+          />
           <Row>
             <Col lg="12">
               <Card>
                 <CardBody>
                   <TableContainer
                     columns={columns}
-                    data={salesData}
+                    data={invoiceData}
                     isGlobalFilter={true}
                     customPageSize={10}
                     className="custom-header-css"
@@ -96,4 +91,4 @@ const Sales = () => {
   );
 };
 
-export default withRouter(Sales);
+export default withRouter(Invoice);

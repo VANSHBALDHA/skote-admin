@@ -30,29 +30,40 @@ const Reserved = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const [currentQun, setCurrentQun] = useState(null);
+  const [currentStock, setCurrentStock] = useState(null);
 
   const toggleModal = () => setModal(!modal);
   const toggleTransferModal = () => setTransfer(!transfer);
   const toggleAddModal = () => setAdd(!add);
 
+  // For edit reserved product model
   const handleEditClick = (product) => {
     setCurrentProduct(product);
     toggleModal();
   };
 
+  // For transfer reserved quantity model
   const handleTransferClick = (product) => {
     setCurrentProduct(product);
     toggleTransferModal();
     setCurrentQun(null);
   };
 
+  // For add stock reserved quantity model
   const handleAddClick = (product) => {
     console.log("product", product);
-    setCurrentProduct(product);
-    setIsEdit(true);
+    setCurrentStock(product);
     toggleAddModal();
   };
 
+  // For add new reserved product model
+  const handleAddReservedProduct = () => {
+    setCurrentProduct(null);
+    setIsEdit(false);
+    toggleModal();
+  };
+
+  // For add/edit reserved product model validation
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -88,6 +99,7 @@ const Reserved = () => {
       ),
   });
 
+  // For transfer reserved product model validation
   const transferFormik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -98,6 +110,33 @@ const Reserved = () => {
     onSubmit: (values) => {
       console.log("Updating Reserved Product:", values);
       toggleTransferModal();
+    },
+  });
+
+  // For add stock product model validation
+  const stockFormik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      id: (currentStock && currentStock.id) || "",
+      productName: (currentStock && currentStock.productName) || "",
+      quantity: (currentStock && currentStock.quantity) || "",
+      addQuantity: "",
+      purchasePrice: "",
+      selectedDate: "",
+    },
+    validationSchema: Yup.object({
+      addQuantity: Yup.number()
+        .required("Please enter a quantity")
+        .min(1, "Quantity must be at least 1")
+        .max(100, "Quantity cannot exceed 100"),
+      purchasePrice: Yup.number()
+        .required("Please enter a purchase price")
+        .min(0.01, "Price must be at least 0.01"),
+      selectedDate: Yup.date().required("Please select a date").nullable(),
+    }),
+    onSubmit: (values) => {
+      console.log("Updating New Stock", values);
+      toggleAddModal();
     },
   });
 
@@ -204,12 +243,6 @@ const Reserved = () => {
     ],
     []
   );
-
-  const handleAddReservedProduct = () => {
-    setCurrentProduct(null);
-    setIsEdit(false);
-    toggleModal();
-  };
 
   return (
     <>
@@ -368,7 +401,7 @@ const Reserved = () => {
                     </div>
                     <div className="mb-3">
                       <Label className="form-label">Available Quantity</Label>
-                      <Input type="number" value="5" disabled />
+                      <Input type="number" value="15" disabled />
                     </div>
                     <div className="mb-3">
                       <Label className="form-label">Transfer Quantity</Label>
@@ -407,7 +440,138 @@ const Reserved = () => {
               </form>
             </ModalBody>
           </Modal>
-          
+
+          {/* Modal for Add Stock quantity */}
+          <Modal
+            isOpen={add}
+            toggle={toggleAddModal}
+            backdrop="static"
+            keyboard={false}
+            size="lg"
+          >
+            <ModalHeader toggle={toggleAddModal} tag="h4">
+              Add Stock
+            </ModalHeader>
+            <ModalBody>
+              <form onSubmit={stockFormik.handleSubmit}>
+                <Row>
+                  <Col className="col-4">
+                    <div className="mb-3">
+                      <Label className="form-label">Product Name</Label>
+                      <Input
+                        type="text"
+                        value={stockFormik?.values?.productName}
+                        disabled
+                      />
+                    </div>
+                  </Col>
+                  <Col className="col-4">
+                    <div className="mb-3">
+                      <Label className="form-label">
+                        Reserved Product Quantity
+                      </Label>
+                      <Input type="number" value="15" disabled />
+                    </div>
+                  </Col>
+                  <Col className="col-4">
+                    <div className="mb-3">
+                      <Label className="form-label">
+                        Display Available Quantity
+                      </Label>
+                      <Input
+                        type="number"
+                        value={stockFormik?.values?.quantity}
+                        disabled
+                      />
+                    </div>
+                  </Col>
+                  <Col className="col-4">
+                    <div className="mb-3">
+                      <Label className="form-label">Add Quantity</Label>
+                      <Input
+                        name="addQuantity"
+                        type="number"
+                        placeholder="Insert Quantity"
+                        onChange={stockFormik.handleChange}
+                        onBlur={stockFormik.handleBlur}
+                        value={stockFormik.values.addQuantity || ""}
+                        invalid={
+                          stockFormik.touched.addQuantity &&
+                          stockFormik.errors.addQuantity
+                            ? true
+                            : false
+                        }
+                      />
+                      {stockFormik.touched.addQuantity &&
+                      stockFormik.errors.addQuantity ? (
+                        <FormFeedback type="invalid">
+                          {stockFormik.errors.addQuantity}
+                        </FormFeedback>
+                      ) : null}
+                    </div>
+                  </Col>
+                  <Col className="col-4">
+                    <div className="mb-3">
+                      <Label className="form-label">Purchase Price</Label>
+                      <Input
+                        name="purchasePrice"
+                        type="number"
+                        placeholder="Insert Purchase Price"
+                        onChange={stockFormik.handleChange}
+                        onBlur={stockFormik.handleBlur}
+                        value={stockFormik.values.purchasePrice || ""}
+                        invalid={
+                          stockFormik.touched.purchasePrice &&
+                          stockFormik.errors.purchasePrice
+                            ? true
+                            : false
+                        }
+                      />
+                      {stockFormik.touched.purchasePrice &&
+                      stockFormik.errors.purchasePrice ? (
+                        <FormFeedback type="invalid">
+                          {stockFormik.errors.purchasePrice}
+                        </FormFeedback>
+                      ) : null}
+                    </div>
+                  </Col>
+                  <Col className="col-4">
+                    <div className="mb-3">
+                      <Label className="form-label">Select Date</Label>
+                      <Input
+                        name="selectedDate"
+                        type="date"
+                        onChange={stockFormik.handleChange}
+                        onBlur={stockFormik.handleBlur}
+                        value={stockFormik.values.selectedDate || ""}
+                        invalid={
+                          stockFormik.touched.selectedDate &&
+                          stockFormik.errors.selectedDate
+                            ? true
+                            : false
+                        }
+                      />
+                      {stockFormik.touched.selectedDate &&
+                      stockFormik.errors.selectedDate ? (
+                        <FormFeedback type="invalid">
+                          {stockFormik.errors.selectedDate}
+                        </FormFeedback>
+                      ) : null}
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <div className="text-end">
+                      <Button type="submit" color="success">
+                        Add
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </form>
+            </ModalBody>
+          </Modal>
         </Container>
       </div>
     </>

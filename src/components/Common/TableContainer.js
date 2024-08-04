@@ -84,6 +84,8 @@ const TableContainer = ({
   handleAddFeatures,
   isAddReservedProduct,
   handleAddReservedProduct,
+  isAddProduct,
+  handleAddProduct,
 }) => {
   const {
     getTableProps,
@@ -307,6 +309,21 @@ const TableContainer = ({
               >
                 <i className="mdi mdi-plus me-1" />
                 Add Inventory
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddProduct && (
+          <Col sm="7">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddProduct}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Product
               </Button>
             </div>
           </Col>

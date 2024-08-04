@@ -33,14 +33,14 @@ const LatestTranaction = props => {
 
   const columns = useMemo(
     () => [
-      {
-        Header: "#",
-        filterable: false,
-        disableFilters: true,
-        Cell: cellProps => {
-          return <input type="checkbox" className="form-check-input" />;
-        },
-      },
+      // {
+      //   Header: "#",
+      //   filterable: false,
+      //   disableFilters: true,
+      //   Cell: cellProps => {
+      //     return <input type="checkbox" className="form-check-input" />;
+      //   },
+      // },
       {
         Header: "Order ID",
         accessor: "orderId",
@@ -121,7 +121,7 @@ const LatestTranaction = props => {
       <EcommerceOrdersModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
-          <div className="mb-4 h4 card-title">Latest Transaction</div>
+          {/* <div className="mb-4 h4 card-title">Latest Transaction</div> */}
           <TableContainer
             columns={columns}
             data={latestTransaction}

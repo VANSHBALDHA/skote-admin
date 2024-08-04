@@ -222,6 +222,10 @@ import Bom from "../pages/MyPages/ManageRequests/Bom";
 import Contact from "../pages/MyPages/ManageRequests/Contact";
 import NewProduct from "../pages/MyPages/ManageRequests/NewProduct";
 import ManageFeatures from "../pages/MyPages/ManageFeatures/ManageFeatures";
+import OrderList from "../pages/MyPages/OrderList.js/OrderList";
+import FeatureList from "../pages/MyPages/ManageProduct/FeatureList";
+import Invoice from "../pages/MyPages/InvoiceList/Invoice";
+import InvoiceDetails from "../pages/MyPages/InvoiceList/InvoiceDetails";
 
 const authProtectedRoutes = [
   { path: "/", component: <Dashboard /> },
@@ -401,11 +405,18 @@ const authProtectedRoutes = [
 
   // Manage Products
   { path: "/manage-products", component: <ManageProduct /> },
+  { path: "/manage-products/feature-list/:id", component: <FeatureList /> },
 
   // Manage Inventory
   { path: "/manage-inventory/display", component: <Display /> },
   { path: "/manage-inventory/reserved", component: <Reserved /> },
   { path: "/manage-inventory/sales", component: <Sales /> },
+  { path: "/manage-inventory/sales/orders/:id", component: <OrderList /> },
+  { path: "/manage-inventory/sales/invoices/:id", component: <Invoice /> },
+  {
+    path: "/manage-inventory/sales/invoices/:id/invoice-details/:id",
+    component: <InvoiceDetails />,
+  },
 
   // Manage Customers
   { path: "/manage-customers/individual", component: <Individual /> },
