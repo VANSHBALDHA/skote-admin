@@ -86,6 +86,8 @@ const TableContainer = ({
   handleAddReservedProduct,
   isAddProduct,
   handleAddProduct,
+  isAddBlog,
+  handleaddBlog,
 }) => {
   const {
     getTableProps,
@@ -142,7 +144,7 @@ const TableContainer = ({
   return (
     <Fragment>
       <Row className="mb-2">
-        <Col md={customPageSizeOptions ? 2 : 1}>
+        <Col md={customPageSizeOptions ? 2 : 1} className="col-md-2">
           <select
             className="form-select"
             value={pageSize}
@@ -164,7 +166,7 @@ const TableContainer = ({
           />
         )}
         {isAddOptions && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -179,7 +181,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddUserList && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -194,7 +196,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddCustList && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -209,7 +211,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddCertificate && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -224,7 +226,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddBrand && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -239,7 +241,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddCategory && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -254,7 +256,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddSubCategory && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -269,7 +271,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddSubSubCategory && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -284,7 +286,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddFeatures && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -299,7 +301,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddReservedProduct && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -314,7 +316,7 @@ const TableContainer = ({
           </Col>
         )}
         {isAddProduct && (
-          <Col sm="7">
+          <Col sm="6">
             <div className="text-sm-end">
               <Button
                 type="button"
@@ -324,6 +326,22 @@ const TableContainer = ({
               >
                 <i className="mdi mdi-plus me-1" />
                 Add Product
+              </Button>
+            </div>
+          </Col>
+        )}
+
+        {isAddBlog && (
+          <Col sm="6">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleaddBlog}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add Blog
               </Button>
             </div>
           </Col>

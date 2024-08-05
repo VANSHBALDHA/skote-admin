@@ -299,7 +299,7 @@ const SidebarContent = (props) => {
                 </li>
               </ul>
             </li>
-            
+
             <li>
               <Link to="/#" className="has-arrow">
                 <i className="bx bxs-detail" />
@@ -311,11 +311,13 @@ const SidebarContent = (props) => {
                 </li>
                 <li>
                   <Link to="/manage-contents/banner">
-                    - {props.t("Payment Tracking")}
+                    - {props.t("Payment")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/manage-contents/legal">- {props.t("Legal")}</Link>
+                  <Link to="/manage-contents/legal">
+                    - {props.t("Tracking")}
+                  </Link>
                 </li>
               </ul>
             </li>

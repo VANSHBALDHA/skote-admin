@@ -1037,6 +1037,61 @@ const invoiceData = [
   },
 ];
 
+const BlogData = [
+  {
+    id: 1,
+    title: "Smartphone X200",
+    image:
+      "https://wpmartfury.com/marketplace5/wp-content/uploads/sites/6/2017/12/blogv10-790x510.jpg",
+    slug: "smartphone-x200",
+    status: "active",
+    category: "Technology",
+    published_date: "25-11-2025",
+  },
+  {
+    id: 2,
+    title: "4K Ultra HD TV",
+    image:
+      "https://wpmartfury.com/marketplace5/wp-content/uploads/sites/6/2017/12/blogv10-790x510.jpg",
+    slug: "4k-ultra-hd-tv",
+    status: "InActive",
+    category: "Entertainment",
+    published_date: "25-11-2025",
+  },
+  {
+    id: 3,
+    title: "Wireless Noise Cancelling Headphones",
+    image:
+      "https://wpmartfury.com/marketplace5/wp-content/uploads/sites/6/2017/12/blogv10-790x510.jpg",
+    slug: "wireless-noise-cancelling-headphones",
+    status: "InActive",
+    category: "Fashion",
+    published_date: "25-11-2025",
+  },
+  {
+    id: 4,
+    title: "Gaming Laptop Pro",
+    image:
+      "https://wpmartfury.com/marketplace5/wp-content/uploads/sites/6/2017/12/blogv10-790x510.jpg",
+    slug: "gaming-laptop-pro",
+    status: "Active",
+    category: "Business",
+    published_date: "25-11-2025",
+  },
+  {
+    id: 5,
+    title: "Smart Home Speaker",
+    image:
+      "https://wpmartfury.com/marketplace5/wp-content/uploads/sites/6/2017/12/blogv10-790x510.jpg",
+    slug: "smart-home-speaker",
+    status: "Active",
+    category: "Others",
+    published_date: "25-11-2025",
+  },
+];
+
+export default BlogData;
+
 export {
   displayData,
   certificateData,
@@ -1054,4 +1109,5 @@ export {
   newProductRequest,
   productsData,
   invoiceData,
+  BlogData,
 };
