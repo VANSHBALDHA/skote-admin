@@ -282,7 +282,7 @@ const SidebarContent = (props) => {
 
             <li>
               <Link to="/#" className="has-arrow">
-                <i className="bx bxs-detail" />
+                <i class="bx bx-image"></i>
                 <span>{props.t("Manage Contents")}</span>
               </Link>
               <ul className="sub-menu">
@@ -307,15 +307,17 @@ const SidebarContent = (props) => {
               </Link>
               <ul className="sub-menu">
                 <li>
-                  <Link to="/manage-contents/blogs">- {props.t("Orders")}</Link>
+                  <Link to="/manage-orders/order-list">
+                    - {props.t("Orders")}
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/manage-contents/banner">
+                  <Link to="/manage-orders/payment">
                     - {props.t("Payment")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/manage-contents/legal">
+                  <Link to="/manage-orders/order-tracking">
                     - {props.t("Tracking")}
                   </Link>
                 </li>

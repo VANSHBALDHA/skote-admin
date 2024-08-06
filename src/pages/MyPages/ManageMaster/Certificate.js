@@ -98,6 +98,7 @@ const Certificate = () => {
       {
         Header: "Certificate Image",
         accessor: "certificateImage",
+        disableFilters: true,
         filterable: false,
         Cell: ({ value }) => (
           <img className="rounded-circle avatar-xs" src={value} alt="" />

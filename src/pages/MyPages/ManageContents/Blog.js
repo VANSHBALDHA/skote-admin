@@ -57,7 +57,7 @@ const Blog = () => {
       title: Yup.string().required("Please enter the title"),
       category: Yup.string().required("Please select cacategory"),
       slug: Yup.string().required("Please add slug"),
-      published_date: Yup.string().required("Please select cacategory"),
+      published_date: Yup.string().required("Please select date"),
       status: Yup.string().required("Please select the status"),
       images: Yup.array().min(1, "Please upload at least one image"),
     }),

@@ -88,6 +88,8 @@ const TableContainer = ({
   handleAddProduct,
   isAddBlog,
   handleaddBlog,
+  isAddAdminUser,
+  handleAddAdminUser,
 }) => {
   const {
     getTableProps,
@@ -342,6 +344,21 @@ const TableContainer = ({
               >
                 <i className="mdi mdi-plus me-1" />
                 Add Blog
+              </Button>
+            </div>
+          </Col>
+        )}
+        {isAddAdminUser && (
+          <Col sm="6">
+            <div className="text-sm-end">
+              <Button
+                type="button"
+                color="primary"
+                className="btn mb-2 me-2"
+                onClick={handleAddAdminUser}
+              >
+                <i className="mdi mdi-plus me-1" />
+                Add User
               </Button>
             </div>
           </Col>

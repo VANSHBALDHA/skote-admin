@@ -88,10 +88,10 @@ const Individual = () => {
               <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
                 <Link
                   to="#"
-                  className="btn btn-sm btn-soft-primary"
+                  className="text-success"
                   onClick={() => handleViewCustomer(row.original)}
                 >
-                  <i className="mdi mdi-eye-outline" id="viewtooltip"></i>
+                  <i className="mdi mdi-eye-outline font-size-18" id="viewtooltip"></i>
                 </Link>
               </li>
               <UncontrolledTooltip placement="top" target="viewtooltip">

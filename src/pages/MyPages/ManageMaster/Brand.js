@@ -101,6 +101,7 @@ const Brand = () => {
       {
         Header: "Brand Logo",
         accessor: "brandLogo",
+        disableFilters: true,
         filterable: false,
         Cell: ({ value }) => (
           <img className="rounded-circle avatar-xs" src={value} alt="" />

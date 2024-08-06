@@ -1090,7 +1090,216 @@ const BlogData = [
   },
 ];
 
-export default BlogData;
+const mainBannerData = [
+  {
+    mainBannerid: 1,
+    mainBannerLink: "https://next-app.harmistechnology.com",
+    mainBannerimage:
+      "https://skote-v-light.react.themesbrand.com/static/media/img-4.d54eed02ef5a376c9b2b.jpg",
+    status: "active",
+  },
+  {
+    mainBannerid: 2,
+    mainBannerLink: "https://next-app.harmistechnology.com",
+    mainBannerimage:
+      "https://skote-v-light.react.themesbrand.com/static/media/img-4.d54eed02ef5a376c9b2b.jpg",
+    status: "active",
+  },
+];
+
+const detailPageBannerData = [
+  {
+    id: 1,
+    Link: "https://next-app.harmistechnology.com",
+    image:
+      "https://skote-v-light.react.themesbrand.com/static/media/img-4.d54eed02ef5a376c9b2b.jpg",
+    status: "active",
+  },
+];
+
+const subAdminData = [
+  {
+    id: 1,
+    fullName: "Patel Varun M",
+    displayName: "VarunPatel",
+    email: "varunpatel@gmail.com",
+    role: "Admin",
+    phone: 8525658545,
+    password: 123456,
+    status: "active",
+  },
+  {
+    id: 2,
+    fullName: "Kanani Sagar",
+    displayName: "SagarKanani",
+    email: "kananisagar@gmail.com",
+    role: "Admin",
+    phone: 8200657865,
+    password: 123456,
+    status: "active",
+  },
+  {
+    id: 3,
+    fullName: "Johan Kelvin",
+    displayName: "JohnaKelvin",
+    email: "johankelvin@gmail.com",
+    role: "Sales",
+    phone: 9874652154,
+    password: 123456,
+    status: "Inactive",
+  },
+  {
+    id: 4,
+    fullName: "Ramesh Vasava",
+    displayName: "RameshVasava",
+    email: "vasavaramesh@gmail.com",
+    role: "Admin",
+    phone: 8525658545,
+    password: 123456,
+    status: "Inactive",
+  },
+  {
+    id: 5,
+    fullName: "Dharmesh Makawana",
+    displayName: "DharmeshMakawana",
+    email: "dharmeshmakwana@gmail.com",
+    role: "Technition",
+    phone: 7465892585,
+    password: 123456,
+    status: "Inactive",
+  },
+];
+
+const bomData = [
+  {
+    id: 1,
+    customerName: "Acme Corp",
+    requestOfAdd: "Add 50 units of widget A",
+    customerRequestDate: "2024-07-25",
+    excelFile: "acme_widget_A.xlsx",
+    yourExcel: "admin_upload_A1.xlsx",
+    uploadedExcelDate: "2024-08-01",
+  },
+  {
+    id: 2,
+    customerName: "Globex Inc.",
+    requestOfAdd: "Add 100 units of widget B",
+    customerRequestDate: "2024-07-26",
+    excelFile: "globex_widget_B.xlsx",
+    yourExcel: "admin_upload_B1.xlsx",
+    uploadedExcelDate: "2024-08-02",
+  },
+  {
+    id: 3,
+    customerName: "Soylent Corp",
+    requestOfAdd: "Add 200 units of widget C",
+    customerRequestDate: "2024-07-27",
+    excelFile: "soylent_widget_C.xlsx",
+    yourExcel: "admin_upload_C1.xlsx",
+    uploadedExcelDate: "2024-08-03",
+  },
+  {
+    id: 4,
+    customerName: "Initech",
+    requestOfAdd: "Add 75 units of widget D",
+    customerRequestDate: "2024-07-28",
+    excelFile: "initech_widget_D.xlsx",
+    yourExcel: "admin_upload_D1.xlsx",
+    uploadedExcelDate: "2024-08-04",
+  },
+  {
+    id: 5,
+    customerName: "Umbrella Corp",
+    requestOfAdd: "Add 30 units of widget E",
+    customerRequestDate: "2024-07-29",
+    excelFile: "umbrella_widget_E.xlsx",
+    yourExcel: "admin_upload_E1.xlsx",
+    uploadedExcelDate: "2024-08-05",
+  },
+  {
+    id: 6,
+    customerName: "Hooli",
+    requestOfAdd: "Add 60 units of widget F",
+    customerRequestDate: "2024-07-30",
+    excelFile: "hooli_widget_F.xlsx",
+    yourExcel: "admin_upload_F1.xlsx",
+    uploadedExcelDate: "2024-08-06",
+  },
+  {
+    id: 7,
+    customerName: "Vehement Capital Partners",
+    requestOfAdd: "Add 40 units of widget G",
+    customerRequestDate: "2024-07-31",
+    excelFile: "vehement_widget_G.xlsx",
+    yourExcel: "admin_upload_G1.xlsx",
+    uploadedExcelDate: "2024-08-07",
+  },
+  {
+    id: 8,
+    customerName: "Massive Dynamic",
+    requestOfAdd: "Add 120 units of widget H",
+    customerRequestDate: "2024-08-01",
+    excelFile: "massive_widget_H.xlsx",
+    yourExcel: "admin_upload_H1.xlsx",
+    uploadedExcelDate: "2024-08-08",
+  },
+  {
+    id: 9,
+    customerName: "Cyberdyne Systems",
+    requestOfAdd: "Add 90 units of widget I",
+    customerRequestDate: "2024-08-02",
+    excelFile: "cyberdyne_widget_I.xlsx",
+    yourExcel: "admin_upload_I1.xlsx",
+    uploadedExcelDate: "2024-08-09",
+  },
+  {
+    id: 10,
+    customerName: "Stark Industries",
+    requestOfAdd: "Add 150 units of widget J",
+    customerRequestDate: "2024-08-03",
+    excelFile: "stark_widget_J.xlsx",
+    yourExcel: "admin_upload_J1.xlsx",
+    uploadedExcelDate: "2024-08-10",
+  },
+];
+
+const quoteRequestData = [
+  {
+    id: 1,
+    quoteNumber: "Q-1001",
+    customerName: "John Doe",
+    customerContactNumber: "9733789598",
+    date: "2024-08-01",
+  },
+  {
+    id: 2,
+    quoteNumber: "Q-1002",
+    customerName: "Jane Smith",
+    customerContactNumber: "9876543210",
+    date: "2024-08-03",
+  },
+  {
+    id: 3,
+    quoteNumber: "Q-1003",
+    customerName: "Alice Johnson",
+    customerContactNumber: "9123456789",
+    date: "2024-08-05",
+  },
+  {
+    id: 4,
+    quoteNumber: "Q-1004",
+    customerName: "Bob Brown",
+    customerContactNumber: "9786543210",
+    date: "2024-08-07",
+  },
+  {
+    id: 5,
+    quoteNumber: "Q-1005",
+    customerName: "Charlie Green",
+    customerContactNumber: "9654321098",
+    date: "2024-08-10",
+  },
+];
 
 export {
   displayData,
@@ -1110,4 +1319,9 @@ export {
   productsData,
   invoiceData,
   BlogData,
+  mainBannerData,
+  detailPageBannerData,
+  subAdminData,
+  bomData,
+  quoteRequestData,
 };
