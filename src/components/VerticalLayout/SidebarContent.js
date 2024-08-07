@@ -301,11 +301,11 @@ const SidebarContent = (props) => {
             </li>
 
             <li>
-              <Link to="/#" className="has-arrow">
+              <Link to="/manage-user-orders">
                 <i className="bx bxs-detail" />
                 <span>{props.t("Manage Orders")}</span>
               </Link>
-              <ul className="sub-menu">
+              {/* <ul className="sub-menu">
                 <li>
                   <Link to="/manage-orders/order-list">
                     - {props.t("Orders")}
@@ -321,7 +321,7 @@ const SidebarContent = (props) => {
                     - {props.t("Tracking")}
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </li>
 
             <li>

@@ -359,6 +359,7 @@ const EcommerceCustomers = props => {
                               <Input
                                 name="phone"
                                 type="text"
+                                inputMode="numeric"
                                 placeholder="Insert Phone No"
                                 onChange={validation.handleChange}
                                 onBlur={validation.handleBlur}

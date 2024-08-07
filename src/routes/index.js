@@ -230,6 +230,7 @@ import UserQuoteList from "../pages/MyPages/QuoteListing/UserQuoteList";
 import CustomerOrder from "../pages/MyPages/ManageOrders/CustomerOrder";
 import CustomerPayment from "../pages/MyPages/ManageOrders/CustomerPayment";
 import TrackingOrder from "../pages/MyPages/ManageOrders/TrackingOrder";
+import UserCartList from "../pages/MyPages/UserCartList/UserCartList";
 
 const authProtectedRoutes = [
   { path: "/", component: <Dashboard /> },
@@ -428,6 +429,7 @@ const authProtectedRoutes = [
 
   // Manage Requests
   { path: "/manage-request/cart", component: <Cart /> },
+  { path: "/manage-request/cart/cart-list/:id", component: <UserCartList /> },
   { path: "/manage-request/quote", component: <Quote /> },
   {
     path: "/manage-request/quote/customre-quote-list/:id",
@@ -445,10 +447,10 @@ const authProtectedRoutes = [
   { path: "/manage-contents/banner", component: <Banner /> },
   { path: "/manage-contents/legal", component: <Legal /> },
 
-    // Manage Contents
-    { path: "/manage-orders/order-list", component: <CustomerOrder /> },
-    { path: "/manage-orders/payment", component: <CustomerPayment /> },
-    { path: "/manage-orders/order-tracking", component: <TrackingOrder /> },
+  // Manage Contents
+  { path: "/manage-user-orders", component: <CustomerOrder /> },
+  // { path: "/manage-orders/payment", component: <CustomerPayment /> },
+  // { path: "/manage-orders/order-tracking", component: <TrackingOrder /> },
 
   // Generate Reports
   { path: "/generate-reports", component: <GenerateReports /> },

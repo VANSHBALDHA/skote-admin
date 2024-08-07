@@ -1301,6 +1301,315 @@ const quoteRequestData = [
   },
 ];
 
+const individualCartData = [
+  {
+    cart_Id: 1,
+    Cart_Number: "CART1001",
+    created_date: "2024-08-01T10:00:00Z",
+    updated_date: "2024-08-01T12:00:00Z",
+    status: "order confirmed",
+    customer_id: 101,
+    customer_name: "John Doe",
+    products: [
+      { product_id: 201, product_name: "Laptop", quantity: 1, price: 1200.0 },
+      { product_id: 202, product_name: "Mouse", quantity: 2, price: 25.0 },
+    ],
+  },
+  {
+    cart_Id: 2,
+    Cart_Number: "CART1002",
+    created_date: "2024-08-02T11:00:00Z",
+    updated_date: "2024-08-02T13:00:00Z",
+    status: "pending",
+    customer_id: 102,
+    customer_name: "Jane Smith",
+    products: [
+      { product_id: 203, product_name: "Keyboard", quantity: 1, price: 50.0 },
+      { product_id: 204, product_name: "Monitor", quantity: 1, price: 300.0 },
+    ],
+  },
+  {
+    cart_Id: 3,
+    Cart_Number: "CART1003",
+    created_date: "2024-08-03T09:30:00Z",
+    updated_date: "2024-08-03T10:30:00Z",
+    status: "expired",
+    customer_id: 103,
+    customer_name: "Alice Johnson",
+    products: [
+      { product_id: 205, product_name: "Printer", quantity: 1, price: 150.0 },
+    ],
+  },
+  {
+    cart_Id: 4,
+    Cart_Number: "CART1004",
+    created_date: "2024-08-04T14:00:00Z",
+    updated_date: "2024-08-04T15:00:00Z",
+    status: "order confirmed",
+    customer_id: 104,
+    customer_name: "Bob Brown",
+    products: [
+      {
+        product_id: 206,
+        product_name: "Smartphone",
+        quantity: 1,
+        price: 800.0,
+      },
+      {
+        product_id: 207,
+        product_name: "Headphones",
+        quantity: 1,
+        price: 120.0,
+      },
+    ],
+  },
+  {
+    cart_Id: 5,
+    Cart_Number: "CART1005",
+    created_date: "2024-08-05T08:00:00Z",
+    updated_date: "2024-08-05T09:00:00Z",
+    status: "pending",
+    customer_id: 105,
+    customer_name: "Carol White",
+    products: [
+      { product_id: 208, product_name: "Webcam", quantity: 1, price: 70.0 },
+    ],
+  },
+  {
+    cart_Id: 6,
+    Cart_Number: "CART1006",
+    created_date: "2024-08-06T16:00:00Z",
+    updated_date: "2024-08-06T17:00:00Z",
+    status: "expired",
+    customer_id: 106,
+    customer_name: "David Green",
+    products: [
+      { product_id: 209, product_name: "Tablet", quantity: 1, price: 200.0 },
+      {
+        product_id: 210,
+        product_name: "Smartwatch",
+        quantity: 1,
+        price: 250.0,
+      },
+    ],
+  },
+  {
+    cart_Id: 7,
+    Cart_Number: "CART1007",
+    created_date: "2024-08-07T12:00:00Z",
+    updated_date: "2024-08-07T13:00:00Z",
+    status: "order confirmed",
+    customer_id: 107,
+    customer_name: "Eve Black",
+    products: [
+      { product_id: 211, product_name: "Camera", quantity: 1, price: 500.0 },
+    ],
+  },
+  {
+    cart_Id: 8,
+    Cart_Number: "CART1008",
+    created_date: "2024-08-08T07:30:00Z",
+    updated_date: "2024-08-08T08:30:00Z",
+    status: "pending",
+    customer_id: 108,
+    customer_name: "Frank Adams",
+    products: [
+      {
+        product_id: 212,
+        product_name: "External Hard Drive",
+        quantity: 1,
+        price: 90.0,
+      },
+    ],
+  },
+  {
+    cart_Id: 9,
+    Cart_Number: "CART1009",
+    created_date: "2024-08-09T18:00:00Z",
+    updated_date: "2024-08-09T19:00:00Z",
+    status: "expired",
+    customer_id: 109,
+    customer_name: "Grace Lee",
+    products: [
+      {
+        product_id: 213,
+        product_name: "Bluetooth Speaker",
+        quantity: 2,
+        price: 60.0,
+      },
+    ],
+  },
+  {
+    cart_Id: 10,
+    Cart_Number: "CART1010",
+    created_date: "2024-08-10T15:00:00Z",
+    updated_date: "2024-08-10T16:00:00Z",
+    status: "order confirmed",
+    customer_id: 110,
+    customer_name: "Hank Wilson",
+    products: [
+      {
+        product_id: 214,
+        product_name: "Gaming Chair",
+        quantity: 1,
+        price: 220.0,
+      },
+      { product_id: 215, product_name: "Desk Lamp", quantity: 1, price: 45.0 },
+    ],
+  },
+];
+
+const cartProducts = [
+  {
+    id: 1,
+    product_img: "https://example.com/images/laptop.jpg",
+    product_name: "Laptop",
+    product_code: "LP1234",
+    price: 1200.0,
+    quantity: 1,
+    total: 1200.0,
+    discount_percentage: 10, // 10% discount
+    discount_value: 120.0, // $120 discount value
+  },
+  {
+    id: 2,
+    product_img: "https://example.com/images/mouse.jpg",
+    product_name: "Mouse",
+    product_code: "MS5678",
+    price: 25.0,
+    quantity: 2,
+    total: 50.0,
+    discount_percentage: 5, // 5% discount
+    discount_value: 2.5, // $2.5 discount value
+  },
+  {
+    id: 3,
+    product_img: "https://example.com/images/keyboard.jpg",
+    product_name: "Keyboard",
+    product_code: "KB9101",
+    price: 50.0,
+    quantity: 1,
+    total: 50.0,
+    discount_percentage: 0, // No discount
+    discount_value: 0.0, // No discount value
+  },
+  {
+    id: 4,
+    product_img: "https://example.com/images/monitor.jpg",
+    product_name: "Monitor",
+    product_code: "MN1121",
+    price: 300.0,
+    quantity: 1,
+    total: 300.0,
+    discount_percentage: 15, // 15% discount
+    discount_value: 45.0, // $45 discount value
+  },
+  {
+    id: 5,
+    product_img: "https://example.com/images/printer.jpg",
+    product_name: "Printer",
+    product_code: "PR3141",
+    price: 150.0,
+    quantity: 1,
+    total: 150.0,
+    discount_percentage: 8, // 8% discount
+    discount_value: 12.0, // $12 discount value
+  },
+];
+
+const customerOrderData = [
+  {
+    name: "John Doe",
+    orderId: "ORD001",
+    date: "2024-08-01",
+    price: 120.5,
+    paymentStatus: "Paid",
+    paymentMethod: "Credit Card",
+    address: "123 Elm Street, Springfield, IL",
+  },
+  {
+    name: "Jane Smith",
+    orderId: "ORD002",
+    date: "2024-08-02",
+    price: 89.99,
+    paymentStatus: "Pending",
+    paymentMethod: "PayPal",
+    address: "456 Maple Avenue, Rivertown, TX",
+  },
+  {
+    name: "Alice Johnson",
+    orderId: "ORD003",
+    date: "2024-08-03",
+    price: 54.75,
+    paymentStatus: "Paid",
+    paymentMethod: "Debit Card",
+    address: "789 Oak Lane, Metropolis, NY",
+  },
+  {
+    name: "Bob Brown",
+    orderId: "ORD004",
+    date: "2024-08-04",
+    price: 99.99,
+    paymentStatus: "Refunded",
+    paymentMethod: "Bank Transfer",
+    address: "321 Pine Road, Lakewood, CA",
+  },
+  {
+    name: "Charlie Davis",
+    orderId: "ORD005",
+    date: "2024-08-05",
+    price: 150.0,
+    paymentStatus: "Paid",
+    paymentMethod: "Credit Card",
+    address: "654 Birch Street, Hilltown, FL",
+  },
+  {
+    name: "Diana Evans",
+    orderId: "ORD006",
+    date: "2024-08-06",
+    price: 77.45,
+    paymentStatus: "Pending",
+    paymentMethod: "PayPal",
+    address: "987 Cedar Blvd, Springdale, CO",
+  },
+  {
+    name: "Ethan Green",
+    orderId: "ORD007",
+    date: "2024-08-07",
+    price: 135.6,
+    paymentStatus: "Paid",
+    paymentMethod: "Credit Card",
+    address: "432 Maple Drive, Brookside, MA",
+  },
+  {
+    name: "Fiona Harris",
+    orderId: "ORD008",
+    date: "2024-08-08",
+    price: 85.2,
+    paymentStatus: "Pending",
+    paymentMethod: "Debit Card",
+    address: "159 Elm Avenue, Port City, WA",
+  },
+  {
+    name: "George Ives",
+    orderId: "ORD009",
+    date: "2024-08-09",
+    price: 65.3,
+    paymentStatus: "Paid",
+    paymentMethod: "Bank Transfer",
+    address: "258 Oak Street, Coastal Town, OR",
+  },
+  {
+    name: "Hannah Jones",
+    orderId: "ORD010",
+    date: "2024-08-10",
+    price: 110.25,
+    paymentStatus: "Paid",
+    paymentMethod: "PayPal",
+    address: "789 Pine Lane, Central City, NV",
+  },
+];
+
 export {
   displayData,
   certificateData,
@@ -1324,4 +1633,7 @@ export {
   subAdminData,
   bomData,
   quoteRequestData,
+  individualCartData,
+  cartProducts,
+  customerOrderData,
 };

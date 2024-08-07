@@ -1,5 +1,14 @@
-import React from "react";
-import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
+import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  Col,
+  Container,
+  Modal,
+  ModalBody,
+  Row,
+} from "reactstrap";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
 import withRouter from "../../../components/Common/withRouter";
 import "./index.css";
@@ -7,6 +16,12 @@ import { useNavigate } from "react-router-dom";
 
 const UserQuoteList = () => {
   const navigate = useNavigate();
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const DeleteProduct = () => {
+    setDeleteModal(true);
+  };
+
   return (
     <>
       <div className="page-content">
@@ -89,6 +104,14 @@ const UserQuoteList = () => {
                   <div className="text-sm-end mt-4">
                     <Button
                       type="button"
+                      color="danger"
+                      className="btn-danger  mb-2 me-2"
+                      onClick={() => DeleteProduct()}
+                    >
+                      <i class="bx bx-trash-alt font-size-14"></i> Delete
+                    </Button>
+                    <Button
+                      type="button"
                       color="success"
                       className="btn-secondary  mb-2 me-2"
                       onClick={() => navigate("/manage-request/quote")}
@@ -97,12 +120,52 @@ const UserQuoteList = () => {
                     </Button>
                   </div>
                 </div>
-                <button class="del_btn btn">
-                  <i class="bx bx-trash-alt font-size-22"></i>
-                </button>
               </div>
             </Col>
           </Row>
+
+          {/* Model For Delete Quote */}
+          <Modal
+            size="sm"
+            isOpen={deleteModal}
+            toggle={DeleteProduct}
+            centered={true}
+          >
+            <div className="modal-content">
+              <ModalBody className="px-4 py-5 text-center">
+                <button
+                  type="button"
+                  onClick={() => setDeleteModal(false)}
+                  className="btn-close position-absolute end-0 top-0 m-3"
+                ></button>
+                <div className="avatar-sm mb-4 mx-auto">
+                  <div className="avatar-title bg-primary text-primary bg-opacity-10 font-size-20 rounded-3">
+                    <i className="mdi mdi-trash-can-outline"></i>
+                  </div>
+                </div>
+                <p className="text-muted font-size-16 mb-4">
+                  Are you sure you want to permanently remove Quote
+                </p>
+
+                <div className="hstack gap-2 justify-content-center mb-0">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => setDeleteModal(false)}
+                  >
+                    Delete Now
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setDeleteModal(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </ModalBody>
+            </div>
+          </Modal>
         </Container>
       </div>
     </>

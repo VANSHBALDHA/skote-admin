@@ -172,6 +172,8 @@ const ManageAdminUsers = () => {
     },
   });
 
+  document.title = "Sub Admin Users | Admin";
+
   return (
     <>
       <div className="page-content">
@@ -263,7 +265,7 @@ const ManageAdminUsers = () => {
                       <Label className="form-label">E-Mail</Label>
                       <Input
                         name="email"
-                        placeholder="Enter Valid Email"
+                        placeholder="Insert Valid Email"
                         type="email"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -287,6 +289,11 @@ const ManageAdminUsers = () => {
                       <Input
                         name="phone"
                         type="text"
+                        inputMode="numeric"
+                        minLength={10}
+                        maxLength={10}
+                        max={10}
+                        min={10}
                         placeholder="Insert Phone No"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
