@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import withRouter from "../../../components/Common/withRouter";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
 import {
@@ -31,11 +31,12 @@ import * as Yup from "yup";
 import Select from "react-select";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Dropzone from "react-dropzone";
 import ViewProductModel from "./ViewProductModel";
 
 const ManageProduct = () => {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+  const imageInputRef = useRef(null);
 
   const [modal, setModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -46,6 +47,11 @@ const ManageProduct = () => {
 
   const [shortContent, setShortContent] = useState("");
   const [longContent, setLongContent] = useState("");
+
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+  const [uploadedDataSheet, setUploadedDataSheet] = useState([]);
+  const [pdfPreviewUrl, setPdfPreviewUrl] = useState(null);
 
   const handleShortContentChange = (newContent) => {
     setShortContent(newContent);
@@ -119,6 +125,8 @@ const ManageProduct = () => {
       mrp: (currentProduct && currentProduct.mrp) || "",
       displayQuantity: (currentProduct && currentProduct.displayQuantity) || "",
       status: (currentProduct && currentProduct.status) || "active",
+      technicalDataSheets: uploadedDataSheet,
+      images: uploadedImages,
     },
     validationSchema: Yup.object({
       productCode: Yup.string().required("Please enter the product code"),
@@ -146,6 +154,12 @@ const ManageProduct = () => {
         .required("Please enter the display quantity")
         .positive("Must be a positive number"),
       status: Yup.string().required("Please select the status"),
+      images: Yup.array()
+        .min(1, "Please upload at least one image")
+        .max(3, "You can only upload a maximum of 3 images"),
+      technicalDataSheets: Yup.array()
+        .min(1, "Please upload a datasheet")
+        .required("Datasheet is required"),
     }),
     onSubmit: (values) => {
       if (isEdit) {
@@ -283,34 +297,48 @@ const ManageProduct = () => {
     label: data?.certificateName,
   }));
 
-  const [selectedFiles, setselectedFiles] = useState([]);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      if (uploadedImages?.length < 3) {
+        const newImage = Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        });
+        setUploadedImages([...uploadedImages, newImage]);
+      } else {
+        alert("You can only upload a maximum of 3 images.");
+      }
+    }
+  };
 
-  function handleAcceptedFiles(files) {
-    files.map((file) =>
-      Object.assign(file, {
-        preview: URL.createObjectURL(file),
-        formattedSize: formatBytes(file.size),
-      })
-    );
+  const handleRemoveImage = (index) => {
+    const newImages = uploadedImages.filter((_, i) => i !== index);
+    setUploadedImages(newImages);
+    if (imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
+  };
 
-    setselectedFiles(files);
-  }
+  const handleDataSheetChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileType = file.type;
+      if (fileType === "application/pdf") {
+        setUploadedDataSheet([file]);
+        setPdfPreviewUrl(URL.createObjectURL(file));
+      } else {
+        alert("Only PDF files are allowed.");
+      }
+    }
+  };
 
-  function formatBytes(bytes, decimals = 2) {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-  }
-
-  function handleDelete(index) {
-    const newFiles = [...selectedFiles];
-    newFiles.splice(index, 1);
-    setselectedFiles(newFiles);
-  }
+  const handleRemovePdf = () => {
+    setUploadedDataSheet([]);
+    setPdfPreviewUrl(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   return (
     <>
@@ -658,7 +686,140 @@ const ManageProduct = () => {
                     </div>
                   </Col>
                 </Row>
+
+                {/* For Add Product Image and Datasheet Row */}
                 <Row>
+                  <CardTitle>Product Images</CardTitle>
+                  <p className="card-title-desc mb-4">
+                    Fill all information below
+                  </p>
+                  <Col className="col-6">
+                    <div className="mb-3">
+                      <Label className="form-label">
+                        Upload Product Images
+                      </Label>
+
+                      <Input
+                        name="images"
+                        type="file"
+                        accept="image/jpeg, image/png"
+                        onChange={handleImageChange}
+                        innerRef={imageInputRef}
+                        invalid={
+                          formik.touched.images && formik.errors.images
+                            ? true
+                            : false
+                        }
+                      />
+                      {formik.touched.images && formik.errors.images ? (
+                        <FormFeedback type="invalid" className="d-block">
+                          {formik.errors.images}
+                        </FormFeedback>
+                      ) : null}
+                    </div>
+                  </Col>
+                  <Col className="col-6">
+                    <div className="mb-3">
+                      <Label className="form-label">Upload Datasheet</Label>
+
+                      <Input
+                        name="images"
+                        type="file"
+                        accept="application/pdf"
+                        onChange={handleDataSheetChange}
+                        innerRef={fileInputRef}
+                        invalid={
+                          formik.touched.technicalDataSheets &&
+                          formik.errors.technicalDataSheets
+                            ? true
+                            : false
+                        }
+                      />
+                      {formik.touched.technicalDataSheets &&
+                      formik.errors.technicalDataSheets ? (
+                        <FormFeedback type="invalid" className="d-block">
+                          {formik.errors.technicalDataSheets}
+                        </FormFeedback>
+                      ) : null}
+                    </div>
+                  </Col>
+                  <Col className="col-6">
+                    {uploadedImages?.length > 0 && (
+                      <Col className="col-12">
+                        <div className="mb-3">
+                          <Label className="form-label">Uploaded Images</Label>
+                          <div className="image-preview-container">
+                            {uploadedImages.map((image, index) => (
+                              <Card
+                                className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete"
+                                key={index + "-file"}
+                              >
+                                <div className="p-2">
+                                  <Row className="align-items-center">
+                                    <Col className="col-auto">
+                                      <img
+                                        data-dz-thumbnail=""
+                                        height="80"
+                                        className="avatar-sm rounded bg-light"
+                                        alt={image.name}
+                                        src={image.preview}
+                                      />
+                                    </Col>
+                                    <Col>
+                                      <Link
+                                        to="#"
+                                        className="text-muted font-weight-bold"
+                                      >
+                                        {image.name}
+                                      </Link>
+                                      <p className="mb-0">
+                                        <strong>{image.formattedSize}</strong>
+                                      </p>
+                                    </Col>
+                                    <Col className="col-auto">
+                                      <button
+                                        type="button"
+                                        className="btn btn-danger btn-sm"
+                                        onClick={() => handleRemoveImage(index)}
+                                      >
+                                        Delete
+                                      </button>
+                                    </Col>
+                                  </Row>
+                                </div>
+                              </Card>
+                            ))}
+                          </div>
+                        </div>
+                      </Col>
+                    )}
+                  </Col>
+                  <Col className="col-6">
+                    {pdfPreviewUrl && (
+                      <Col className="col-12">
+                        <Label className="form-label">Uploaded Datasheet</Label>
+                        <div className="mb-3">
+                          <Button
+                            color="primary"
+                            onClick={() => window.open(pdfPreviewUrl, "_blank")}
+                          >
+                            View
+                          </Button>
+                          <Button
+                            color="danger"
+                            onClick={handleRemovePdf}
+                            className="ms-3"
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </Col>
+                    )}
+                  </Col>
+                </Row>
+
+                {/* For Add Product Description Row */}
+                <Row className="mt-3">
                   <CardTitle>Product Description</CardTitle>
                   <p className="card-title-desc mb-4">
                     Fill all information below
@@ -694,88 +855,7 @@ const ManageProduct = () => {
                     </div>
                   </Col>
                 </Row>
-                <Row>
-                  <CardTitle>Product Images</CardTitle>
-                  <p className="card-title-desc mb-4">
-                    Fill all information below
-                  </p>
-                  <Col className="col-6 mb-5">
-                    <div className="mb-3">
-                      <Label className="form-label">
-                        Upload Product Images
-                      </Label>
-                      <Dropzone
-                        onDrop={(acceptedFiles) => {
-                          handleAcceptedFiles(acceptedFiles);
-                        }}
-                      >
-                        {({ getRootProps, getInputProps }) => (
-                          <div className="dropzone">
-                            <div
-                              className="dz-message needsclick"
-                              {...getRootProps()}
-                            >
-                              <input {...getInputProps()} />
-                              <div className="dz-message needsclick">
-                                <div className="mb-3">
-                                  <i className="display-4 text-muted bx bxs-cloud-upload" />
-                                </div>
-                                <h4>Drop files here or click to upload.</h4>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </Dropzone>
-                    </div>
-                  </Col>
-                  <Col className="col-6">
-                    <Label className="form-label">Uploaded Images</Label>
-                    <div className="dropzone-previews" id="file-previews">
-                      {selectedFiles.map((f, i) => {
-                        return (
-                          <Card
-                            className="mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete"
-                            key={i + "-file"}
-                          >
-                            <div className="p-2">
-                              <Row className="align-items-center">
-                                <Col className="col-auto">
-                                  <img
-                                    data-dz-thumbnail=""
-                                    height="80"
-                                    className="avatar-sm rounded bg-light"
-                                    alt={f.name}
-                                    src={f.preview}
-                                  />
-                                </Col>
-                                <Col>
-                                  <Link
-                                    to="#"
-                                    className="text-muted font-weight-bold"
-                                  >
-                                    {f.name}
-                                  </Link>
-                                  <p className="mb-0">
-                                    <strong>{f.formattedSize}</strong>
-                                  </p>
-                                </Col>
-                                <Col className="col-auto">
-                                  <button
-                                    type="button"
-                                    className="btn btn-danger btn-sm"
-                                    onClick={() => handleDelete(i)}
-                                  >
-                                    Delete
-                                  </button>
-                                </Col>
-                              </Row>
-                            </div>
-                          </Card>
-                        );
-                      })}
-                    </div>
-                  </Col>
-                </Row>
+
                 <Row>
                   <Col>
                     <div className="text-end">

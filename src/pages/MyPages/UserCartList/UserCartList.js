@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Button,
   Card,
   CardBody,
+  CardTitle,
   Col,
   Container,
   FormFeedback,
@@ -17,12 +18,14 @@ import {
 } from "reactstrap";
 import withRouter from "../../../components/Common/withRouter";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cartProducts as initialCartProducts } from "../../../common/data/MyFackData";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const UserCartList = () => {
+  const fileInputRef = useRef(null);
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [addProduct, setAddProduct] = useState(null);
@@ -114,6 +117,9 @@ const UserCartList = () => {
   const handleRemoveImage = (index) => {
     const newImages = uploadedImages.filter((_, i) => i !== index);
     setUploadedImages(newImages);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
@@ -129,16 +135,29 @@ const UserCartList = () => {
             <Col xl={12}>
               <Card>
                 <CardBody>
-                  <div className="text-sm-end">
-                    <Button
-                      type="button"
-                      color="primary"
-                      className="btn mb-2 me-2"
-                      onClick={handleAddProduct}
-                    >
-                      <i className="mdi mdi-plus-circle-outline me-1" />
-                      Add Product
-                    </Button>
+                  <div className="d-flex justify-content-between">
+                    <div className="text-sm-end">
+                      <Button
+                        type="button"
+                        color="primary"
+                        className="btn mb-2 me-2 d-flex align-items-center"
+                        onClick={() => navigate("/manage-request/cart")}
+                      >
+                        <i class="bx bx-arrow-back me-1"></i>
+                        Back to Cart
+                      </Button>
+                    </div>
+                    <div className="text-sm-end">
+                      <Button
+                        type="button"
+                        color="success"
+                        className="btn mb-2 me-2"
+                        onClick={handleAddProduct}
+                      >
+                        <i className="mdi mdi-plus-circle-outline me-1" />
+                        Add Product
+                      </Button>
+                    </div>
                   </div>
                   <div className="table-responsive">
                     <Table className="table align-middle mb-0 table-nowrap">
@@ -271,6 +290,41 @@ const UserCartList = () => {
                             </div>
                           </>
                         )}
+                      </tbody>
+                    </Table>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col xl={8}></Col>
+            <Col xl={4}>
+              <Card>
+                <CardBody>
+                  <CardTitle className="mb-3">Order Summary</CardTitle>
+
+                  <div className="table-responsive">
+                    <Table className="table mb-0">
+                      <tbody>
+                        <tr>
+                          <td>Grand Total :</td>
+                          <td>₹ 1,857</td>
+                        </tr>
+                        <tr>
+                          <td>Discount : </td>
+                          <td>- ₹ 157</td>
+                        </tr>
+                        <tr>
+                          <td>Shipping Charge :</td>
+                          <td>₹ 25</td>
+                        </tr>
+                        <tr>
+                          <td>Estimated Tax : </td>
+                          <td>₹ 19.22</td>
+                        </tr>
+                        <tr>
+                          <th>Total :</th>
+                          <th>₹ 1744.22</th>
+                        </tr>
                       </tbody>
                     </Table>
                   </div>
@@ -456,6 +510,8 @@ const UserCartList = () => {
                         name="product_img"
                         type="file"
                         onChange={handleImageChange}
+                        accept="image/jpeg, image/png"
+                        innerRef={fileInputRef}
                         invalid={
                           formik.touched.product_img &&
                           formik.errors.product_img
@@ -525,7 +581,7 @@ const UserCartList = () => {
                   <Col>
                     <div className="text-end">
                       <Button type="submit" color="success">
-                        {isEdit ? "Update Cart" : "Add Product"}
+                        {isEdit ? "Update Cart" : "Save"}
                       </Button>
                     </div>
                   </Col>

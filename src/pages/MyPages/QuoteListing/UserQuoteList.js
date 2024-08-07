@@ -60,8 +60,16 @@ const UserQuoteList = () => {
                       <div class="row">
                         <div class="col-md-5">
                           <div class="product_price">
-                            <p>Original price</p>
-                            <h3>€995.00</h3>
+                            <div className="d-flex gap-3">
+                              <div className="boxes">
+                                <p>Original price</p>
+                                <h3>₹20,000</h3>
+                              </div>
+                              <div className="boxes">
+                                <p>Customer price</p>
+                                <h3>₹18,000</h3>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-4">
@@ -72,10 +80,6 @@ const UserQuoteList = () => {
                               placeholder="Your Price"
                             />
                             <i class="bx bx-info-circle your_price_input"></i>
-                            {/* <i
-                              class="bx bx-info-circle"
-                              className="your_price_input"
-                            ></i> */}
                           </div>
                         </div>
                         <div class="col-md-3">

@@ -219,6 +219,7 @@ const CustomerOrder = () => {
                         </Col>
                       </Row>
                     </TabPane>
+                    
                     {/* indivisual customer tab 2 */}
                     <TabPane tabId="2">
                       <Row>

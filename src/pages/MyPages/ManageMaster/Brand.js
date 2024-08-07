@@ -251,7 +251,7 @@ const Brand = () => {
                       <Input
                         name="brandLogo"
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg, image/png"
                         onChange={handleFileChange}
                         invalid={
                           formik.touched.brandLogo && formik.errors.brandLogo

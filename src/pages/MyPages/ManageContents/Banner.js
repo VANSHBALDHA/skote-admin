@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import withRouter from "../../../components/Common/withRouter";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
 import {
@@ -27,6 +27,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const Banner = () => {
+  const fileInputRef = useRef(null);
   const [isEditMain, setEditMain] = useState(false);
   const [heroBannerData, setHeroBannerData] = useState(null);
 
@@ -76,6 +77,9 @@ const Banner = () => {
   const handleRemoveImage = (index) => {
     const newImages = mainImage.filter((_, i) => i !== index);
     setMainImage(newImages);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   document.title = "Banner Section | Admin";
@@ -329,6 +333,7 @@ const Banner = () => {
                         name="image"
                         type="file"
                         onChange={handleImageChange}
+                        innerRef={fileInputRef}
                         invalid={
                           formik.touched.image && formik.errors.image
                             ? true
@@ -471,6 +476,7 @@ const Banner = () => {
                         name="image"
                         type="file"
                         onChange={handleImageChange}
+                        innerRef={fileInputRef}
                         invalid={
                           formik.touched.image && formik.errors.image
                             ? true

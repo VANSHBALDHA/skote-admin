@@ -74,15 +74,18 @@ const Cart = () => {
         accessor: "action",
         disableFilters: true,
         Cell: ({ row }) => {
+          const status = row.original.status;
+          const isExpired = status === "expired";
           return (
             <div className="d-flex gap-3 align-items-center">
               <Link
                 to={`/manage-request/cart/cart-list/${row.original.Cart_Number}`}
-                className="text-success"
+                className={`text-success ${isExpired ? "disabled-link" : ""}`}
+                aria-disabled={isExpired}
               >
                 <i className="mdi mdi-pencil font-size-18" id="edittooltip" />
                 <UncontrolledTooltip placement="top" target="edittooltip">
-                  Edit Order
+                  Edit Cart
                 </UncontrolledTooltip>
               </Link>
             </div>

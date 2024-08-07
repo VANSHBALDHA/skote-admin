@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import withRouter from "../../../components/Common/withRouter";
 import Breadcrumbs from "../../../components/Common/Breadcrumb";
 import {
@@ -25,6 +25,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 const Blog = () => {
+  const fileInputRef = useRef(null);
   const [modal, setModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [isView, setIsView] = useState(false);
@@ -169,6 +170,9 @@ const Blog = () => {
   const handleRemoveImage = (index) => {
     const newImages = uploadedImages.filter((_, i) => i !== index);
     setUploadedImages(newImages);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const quillModules = {
@@ -380,6 +384,8 @@ const Blog = () => {
                       <Input
                         name="images"
                         type="file"
+                        accept="image/jpeg, image/png"
+                        innerRef={fileInputRef}
                         onChange={handleImageChange}
                         invalid={
                           formik.touched.images && formik.errors.images
