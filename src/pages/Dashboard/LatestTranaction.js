@@ -10,7 +10,6 @@ import {
 } from "reactstrap";
 import { getOrders as onGetOrders } from "../../store/actions";
 
-import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal";
 import { latestTransaction } from "../../common/data/dashboard";
 
 import {
@@ -23,6 +22,7 @@ import {
 } from "./LatestTranactionCol";
 
 import TableContainer from "../../components/Common/TableContainer";
+import EcommerceOrdersModal from "../Ecommerce/EcommerceOrders/EcommerceOrdersModal";
 
 const LatestTranaction = props => {
 
