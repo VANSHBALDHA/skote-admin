@@ -3,7 +3,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { layoutTypes } from "./constants/layout";
-// Import Routes all
 import { authProtectedRoutes, publicRoutes } from "./routes";
 
 // Import all middleware
@@ -11,7 +10,6 @@ import Authmiddleware from "./routes/route";
 
 // layouts Format
 import VerticalLayout from "./components/VerticalLayout/";
-import HorizontalLayout from "./components/HorizontalLayout/";
 import NonAuthLayout from "./components/NonAuthLayout";
 
 // Import scss
@@ -27,9 +25,6 @@ const getLayout = (layoutType) => {
   switch (layoutType) {
     case layoutTypes.VERTICAL:
       Layout = VerticalLayout;
-      break;
-    case layoutTypes.HORIZONTAL:
-      Layout = HorizontalLayout;
       break;
     default:
       break;

@@ -121,7 +121,7 @@ const LatestTranaction = props => {
       <EcommerceOrdersModal isOpen={modal1} toggle={toggleViewModal} />
       <Card>
         <CardBody>
-          {/* <div className="mb-4 h4 card-title">Latest Transaction</div> */}
+          <div className="mb-4 h4 card-title">Latest Transaction</div>
           <TableContainer
             columns={columns}
             data={latestTransaction}

@@ -1,13 +1,10 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 // For No Route Match
 import PageNotFound from "../pages/Utility/pages-404";
 
 // Profile
 import UserProfile from "../pages/Authentication/user-profile";
-
-import EcommerceAddProduct from "../pages/Ecommerce/EcommerceAddProduct";
 
 // Authentication related pages
 import Login from "../pages/Authentication/Login";
@@ -73,7 +70,6 @@ import TrackingOrder from "../pages/MyPages/ManageOrders/TrackingOrder";
 import UserCartList from "../pages/MyPages/UserCartList/UserCartList";
 
 const authProtectedRoutes = [
-  { path: "/ecommerce-add-product", component: <EcommerceAddProduct /> },
 
   { path: "/", exact: true, component: <Dashboard /> },
 
